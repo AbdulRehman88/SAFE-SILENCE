@@ -22,3 +22,5 @@ keywords:
   - digital twins
   - bounded recovery
   - reproducible research
+version: "0.20.1"
+date-released: "2026-10-15"
