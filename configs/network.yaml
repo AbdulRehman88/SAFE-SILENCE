@@ -1,0 +1,119 @@
+network:
+  task: K
+  network_version: "1.0"
+  input_directory: results/task_j
+  output_directory: results/task_k
+  simulator: native_discrete_event
+  topology: sensor_relay_buoy
+  hops: 2
+  link_modes: [acoustic]
+  duplex: half
+  propagation_speed_m_s: 1500.0
+  nominal_distance_per_hop_m: 1000.0
+  bitrate_bps: 5000
+  packet_header_bytes: 20
+  ack_bytes: 8
+  maximum_attempts: 3
+  retry_backoff_seconds: 1.0
+  evaluation_roles: [internal_test, external_test]
+  repetitions: 10
+  base_seed: 3407
+  store_counterfactual_randomness: true
+  hidden_oracle_state_is_never_receiver_input: true
+  energy:
+    tx_watts: 10.0
+    rx_watts: 1.0
+    accounting: incremental_communication_only
+  outage:
+    model: hidden_semi_markov
+    regimes: [good, degraded, outage]
+    event_correlated_outages_primary: false
+    ack_asymmetry: true
+    primary_generation_uses_event_labels: false
+  scenarios:
+    F0_stable:
+      role: reference
+      event_coupled: false
+      start_state: good
+      packet_success: {good: 0.998, degraded: 0.970, outage: 0.150}
+      ack_success: {good: 0.998, degraded: 0.960, outage: 0.100}
+      dwell_mean_steps: {good: 500.0, degraded: 8.0, outage: 2.0}
+      dwell_shape: {good: 4.0, degraded: 2.0, outage: 2.0}
+      transition:
+        good: {degraded: 0.95, outage: 0.05}
+        degraded: {good: 0.85, outage: 0.15}
+        outage: {good: 0.75, degraded: 0.25}
+    F2_burst:
+      role: primary
+      event_coupled: false
+      start_state: good
+      packet_success: {good: 0.990, degraded: 0.800, outage: 0.050}
+      ack_success: {good: 0.985, degraded: 0.700, outage: 0.030}
+      dwell_mean_steps: {good: 96.0, degraded: 8.0, outage: 4.0}
+      dwell_shape: {good: 2.0, degraded: 1.5, outage: 1.3}
+      transition:
+        good: {degraded: 0.85, outage: 0.15}
+        degraded: {good: 0.70, outage: 0.30}
+        outage: {good: 0.55, degraded: 0.45}
+    F3_long_heavy_tail:
+      role: primary
+      event_coupled: false
+      start_state: good
+      packet_success: {good: 0.985, degraded: 0.700, outage: 0.020}
+      ack_success: {good: 0.975, degraded: 0.600, outage: 0.010}
+      dwell_mean_steps: {good: 72.0, degraded: 12.0, outage: 12.0}
+      dwell_shape: {good: 1.8, degraded: 1.2, outage: 0.75}
+      transition:
+        good: {degraded: 0.75, outage: 0.25}
+        degraded: {good: 0.55, outage: 0.45}
+        outage: {good: 0.35, degraded: 0.65}
+    F5_ack_asymmetry:
+      role: stress
+      event_coupled: false
+      start_state: good
+      packet_success: {good: 0.990, degraded: 0.800, outage: 0.050}
+      ack_success: {good: 0.900, degraded: 0.450, outage: 0.010}
+      dwell_mean_steps: {good: 96.0, degraded: 8.0, outage: 4.0}
+      dwell_shape: {good: 2.0, degraded: 1.5, outage: 1.3}
+      transition:
+        good: {degraded: 0.85, outage: 0.15}
+        degraded: {good: 0.70, outage: 0.30}
+        outage: {good: 0.55, degraded: 0.45}
+    F8_hard_partition:
+      role: stress
+      event_coupled: false
+      start_state: good
+      packet_success: {good: 0.990, degraded: 0.800, outage: 0.0}
+      ack_success: {good: 0.985, degraded: 0.700, outage: 0.0}
+      dwell_mean_steps: {good: 96.0, degraded: 8.0, outage: 4.0}
+      dwell_shape: {good: 2.0, degraded: 1.5, outage: 1.3}
+      transition:
+        good: {degraded: 0.85, outage: 0.15}
+        degraded: {good: 0.70, outage: 0.30}
+        outage: {good: 0.55, degraded: 0.45}
+      forced_partition_fraction: 0.08
+    F13_event_coincident_outage:
+      role: stress
+      event_coupled: true
+      start_state: good
+      packet_success: {good: 0.990, degraded: 0.800, outage: 0.020}
+      ack_success: {good: 0.985, degraded: 0.700, outage: 0.010}
+      dwell_mean_steps: {good: 96.0, degraded: 8.0, outage: 4.0}
+      dwell_shape: {good: 2.0, degraded: 1.5, outage: 1.3}
+      transition:
+        good: {degraded: 0.85, outage: 0.15}
+        degraded: {good: 0.70, outage: 0.30}
+        outage: {good: 0.55, degraded: 0.45}
+      critical_outage_probability: 0.65
+    F14_unseen_duration:
+      role: generalization
+      event_coupled: false
+      start_state: good
+      packet_success: {good: 0.985, degraded: 0.700, outage: 0.020}
+      ack_success: {good: 0.975, degraded: 0.600, outage: 0.010}
+      dwell_mean_steps: {good: 64.0, degraded: 16.0, outage: 24.0}
+      dwell_shape: {good: 1.4, degraded: 0.9, outage: 0.55}
+      transition:
+        good: {degraded: 0.70, outage: 0.30}
+        degraded: {good: 0.45, outage: 0.55}
+        outage: {good: 0.25, degraded: 0.75}

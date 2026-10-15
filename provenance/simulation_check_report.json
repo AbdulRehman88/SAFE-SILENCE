@@ -1,0 +1,47 @@
+{
+  "status": "PASSED",
+  "scope": "Development-data simulation smoke check",
+  "site": "CE02SHSM",
+  "confirmation_evidence": false,
+  "full_confirmation_rerun": false,
+  "model_retraining_performed": false,
+  "cells": [
+    {
+      "protocol": "primary_15min",
+      "scenario": "F2_burst",
+      "paired_repetitions": 2,
+      "checkpoint_sha256": "e0a2eceaa31a40b559fc97dfc2710ce7a006c83757e73de83cca2e252d72533a"
+    },
+    {
+      "protocol": "secondary_60min",
+      "scenario": "F2_burst",
+      "paired_repetitions": 2,
+      "checkpoint_sha256": "a46d8b1fc87232335a9291958543a8e7d651ba05c965b489051123ca0407610c"
+    }
+  ],
+  "input_sha256": {
+    "results/task_j/task_j_summary.json": "43e73a2867c244a5c5791f62ed235e007cddaeaee1021ba382d7e45b316373aa",
+    "results/task_j/evidence/primary_15min/CE02SHSM.parquet": "4bc0e7fea62f367388438f7f50dd4ef83f5530940ebca84200399e8ceae56693",
+    "results/task_j/evidence/primary_15min/CE07SHSM.parquet": "1c6cee2c1338670d4268d2bfa28742cd2f1b07e09fe4fb2d76dbf3ca79555455",
+    "results/task_j/evidence/secondary_60min/CE02SHSM.parquet": "86a1f6d21b76bff27060d3c4ef0441c7ac4266bd5ec83fb7dce820325970e794",
+    "results/task_j/evidence/secondary_60min/CE07SHSM.parquet": "45066cbbf669a71ae55ea4cba47cbd9794b04eee2a3a223acafe3bd135f242a2",
+    "results/task_j/evidence/secondary_60min/CE01ISSM.parquet": "37089371e5951c8e189867d3e21e4017c5c4e4bfb9e4c76084b4f9b71b342478",
+    "results/task_j/evidence/secondary_60min/CE06ISSM.parquet": "ade87e3e671bf0217ce05009d1a098e7a9c5e18f6c6e65595d9487e24460b117",
+    "results/task_j/semantic_decision_metrics.csv": "68b074e0a49f633ce06a33af949fc45489eafe737d0e219bee55a5f9e0ead710",
+    "results/task_o/task_o_summary.json": "ca88c2bd66d6b34043eb1bf56ca2062ce4e6083845d7d1bce21c1a324940734a",
+    "results/task_o/membership/primary_15min/CE02SHSM.parquet": "a759246339e489ec64a7862198b6ba2faacf40ae34e1fada36abc319f015c552",
+    "results/task_o/summaries/primary_15min/CE02SHSM.parquet": "c8cd913f737e1637079614a08c698ce0a9d6f015f5a23e2def5180fa2b11a1b2",
+    "results/task_o/membership/primary_15min/CE07SHSM.parquet": "6f89867e7f20148661d131fc854c34242a4a17d3dc25fc69d2e959793a135698",
+    "results/task_o/summaries/primary_15min/CE07SHSM.parquet": "22de317e778b70bb87841385a3cc3e1db5cda3c2306c21564c91b51c0e4d39b4",
+    "results/task_o/membership/secondary_60min/CE02SHSM.parquet": "fcdd4a571d528357cf256d0da37e44f2f336cd6542deb3b510f6bf39489879a6",
+    "results/task_o/summaries/secondary_60min/CE02SHSM.parquet": "2e4e34bc92fe2bb3e83d12809e92b51b8f7c31dee73a392caa5255112f9eeb2c",
+    "results/task_o/membership/secondary_60min/CE07SHSM.parquet": "6b4462ae0e414cb094addd03557033900f4d5da64f61d692cdc1f46ffd6308cf",
+    "results/task_o/summaries/secondary_60min/CE07SHSM.parquet": "abd4b5f042828ba4d502ff951376298ef6db37279aa5436b3601c53018202b4b",
+    "results/task_o/membership/secondary_60min/CE01ISSM.parquet": "f71a3debbe7f96695340cd16922f1fb40326c7ea4857754d4d02aae00f5c87ba",
+    "results/task_o/summaries/secondary_60min/CE01ISSM.parquet": "97db81b3123cd911a5f8ac96fec410cd8dcd2bb36bc47dac776fd4d3ad1f22d2",
+    "results/task_o/membership/secondary_60min/CE06ISSM.parquet": "8a16a409e6e8dab074f9a866cf4274f9b6129c7fb22c87643a4e7526bbbcda54",
+    "results/task_o/summaries/secondary_60min/CE06ISSM.parquet": "6d9ed6645a08ca92bf45c5d7e18bf7317bc4375149525b7672dae02bb7d97508",
+    "results/task_o/fusion_metrics.csv": "c9be19f694fbe5c31f3909ce73b62fc26d57d7c8ea6a016a0d62203e8da34d64"
+  },
+  "simulation_check_script_sha256": "f4abd5a39384d08c8746c21a01f2f477a3affec1b0041f14ef8729b7a55d42c4"
+}

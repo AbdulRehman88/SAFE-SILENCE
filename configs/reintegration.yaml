@@ -1,0 +1,53 @@
+reintegration:
+  task: R
+  reintegration_version: "1.0"
+  integration_directory: results/task_q
+  scheduler_directory: results/task_p
+  fusion_directory: results/task_o
+  network_directory: results/task_k
+  output_directory: results/task_r
+  scheduler_policies:
+    - cvar_risk_reduction_per_joule
+    - expected_risk_reduction_per_joule
+  recovery_policies:
+    - safe_silence_bounded
+    - no_recovery
+  proposed_system:
+    scheduler: cvar_risk_reduction_per_joule
+    recovery: safe_silence_bounded
+  paired_references:
+    expected_scheduler:
+      scheduler: expected_risk_reduction_per_joule
+      recovery: safe_silence_bounded
+    no_recovery:
+      scheduler: cvar_risk_reduction_per_joule
+      recovery: no_recovery
+  relay_receiver_contract:
+    timeline_unit: relay_candidate
+    critical_summary_action: alert
+    ordinary_selected_summary_action: innovation
+    unselected_summary_action: silent
+    semantic_risk_aggregation: maximum_transmitted_evidence
+    validity_from_preserved_deadline_extreme: true
+    maximum_validity_opportunities: 4
+    missing_critical_summary_is_unsafe: true
+    exact_critical_provenance_requires_retained_item: true
+  statistics:
+    confidence_level: 0.95
+    bootstrap_resamples: 10000
+    seed: 3407
+    paired_unit: repetition
+    test: two_sided_wilcoxon_signed_rank
+    multiplicity_correction: holm_within_site_protocol_comparison
+    temporal_protocols_may_be_pooled: false
+  relay_to_buoy_hops: 1
+  parameters_tuned_on_test_or_external_data: false
+  uses_future_measurements: false
+  oracle_fields_are_policy_inputs: false
+  event_truth_is_policy_input: false
+  scheduler_selection_is_receiver_input: false
+  reporting:
+    store_proposed_system_trace: true
+    energy_is_modeled_not_hardware_measured: true
+    actual_field_deployment_claimed: false
+    claim_scope: simulated_semantic_relay_receiver_recovery_path

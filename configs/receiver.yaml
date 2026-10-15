@@ -1,0 +1,48 @@
+receiver:
+  task: L
+  receiver_version: "1.0"
+  input_directory: results/task_k
+  output_directory: results/task_l
+  temporal_protocols_may_be_pooled: false
+  algorithm_shared_across_sites_and_scenarios: true
+  parameters_tuned_on_test_or_external_data: false
+  uses_nominal_model_not_scenario_oracle: true
+  oracle_fields_are_evaluation_only: true
+  event_truth_is_evaluation_only: true
+  future_measurements_used: false
+  receiver_observable_packet_fields:
+    - node_action
+    - semantic_risk
+    - validity_horizon_steps
+    - silence_contract_id
+  forbidden_inference_prefixes: [_oracle_]
+  forbidden_inference_fields:
+    - causal_critical_evidence
+    - packet_attempted
+    - transmission_attempts
+    - acknowledged
+    - decision_reason
+  connectivity_filter:
+    prior_reachable: 0.99
+    reachable_to_reachable: 0.995
+    unreachable_to_reachable: 0.20
+    packet_arrival_given_reachable: 0.98
+    packet_arrival_given_unreachable: 0.02
+    due_packet_absence_given_reachable: 0.08
+    due_packet_absence_given_unreachable: 0.98
+    numerical_epsilon: 1.0e-9
+  environmental_belief:
+    age_growth_per_step: 0.18
+    missing_contract_uncertainty: 1.0
+  state_policy:
+    trust_connectivity_threshold: 0.95
+    trusted_environmental_uncertainty_maximum: 0.85
+    failure_suspected_threshold: 0.35
+    stale_unsafe_after_overdue_steps: 2
+    states: [updated, trusted_silence, ambiguous, failure_suspected, recovery_pending, stale_unsafe]
+    no_normal_fallback_after_contract_expiry: true
+    unknown_is_retained: true
+  reporting:
+    primary_endpoint: critical_false_trust_rate
+    receiver_outputs_never_include_oracle_as_evidence: true
+    report_by_protocol_site_scenario_and_repetition: true

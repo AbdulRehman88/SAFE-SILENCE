@@ -1,0 +1,47 @@
+data:
+  provider: NSF Ocean Observatories Initiative
+  acquisition_manifest: configs/ooi_acquisition_manifest.json
+  primary_site: CE02SHSM
+  external_test_sites: [CE01ISSM, CE06ISSM, CE07SHSM]
+  streams: [flort, ctd, doxygen]
+  variables:
+    - sea_water_temperature
+    - sea_water_practical_salinity
+    - dissolved_oxygen
+    - chlorophyll_a
+    - optical_backscatter
+  audit:
+    output_directory: data/interim/ooi_audit
+    preserve_raw: true
+    verify_sha256: true
+    duplicate_policy: report_only
+    qc_policy: report_all_before_filtering
+    accepted_qartod_flags: [1, 2]
+    gap_factors: [2, 4, 12]
+    candidate_grid_minutes: [1, 5, 15, 30, 60]
+    minimum_joint_coverage: 0.80
+    availability_windows:
+      window_days: 30
+      minimum_window_days: 7
+      minimum_joint_coverage: 0.80
+      coverage_thresholds: [0.70, 0.80, 0.90]
+      selection_uses_measurement_values: false
+      network_outages_injected_after_selection: true
+    top_gaps_per_stream: 25
+    physical_ranges:
+      sea_water_temperature:
+        expected_units: degree_Celsius
+        minimum: -2.5
+        maximum: 40.0
+      sea_water_practical_salinity:
+        expected_units: "0.001"
+        minimum: 0.0
+        maximum: 45.0
+      moles_of_oxygen_per_unit_mass_in_sea_water:
+        expected_units: micromol.kg-1
+        minimum: 0.0
+        maximum: 1000.0
+      mole_concentration_of_dissolved_molecular_oxygen_in_sea_water:
+        expected_units: micromol.L-1
+        minimum: 0.0
+        maximum: 1000.0

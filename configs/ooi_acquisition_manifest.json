@@ -1,0 +1,145 @@
+{
+  "manifest_version": "1.0",
+  "created_utc": "2026-09-16T00:00:00Z",
+  "provider": "NSF Ocean Observatories Initiative",
+  "server": "https://erddap.dataexplorer.oceanobservatories.org/erddap",
+  "protocol": "tabledap",
+  "response_format": "csv",
+  "primary_site": "CE02SHSM",
+  "site_roles": {
+    "CE02SHSM": "primary Oregon Shelf development and internal temporal evaluation",
+    "CE01ISSM": "Oregon Inshore cross-site evaluation candidate",
+    "CE06ISSM": "Washington Inshore cross-site evaluation candidate",
+    "CE07SHSM": "Washington Shelf cross-site evaluation candidate"
+  },
+  "stream_templates": {
+    "flort": {
+      "description": "3-wavelength fluorometer",
+      "variables": [
+        "time",
+        "latitude",
+        "longitude",
+        "z",
+        "concentration_of_colored_dissolved_organic_matter_in_sea_water_expressed_as_equivalent_mass_fraction_of_quinine_sulfate_dihydrate",
+        "concentration_of_colored_dissolved_organic_matter_in_sea_water_expressed_as_equivalent_mass_fraction_of_quinine_sulfate_dihydrate_qc_agg",
+        "mass_concentration_of_chlorophyll_a_in_sea_water",
+        "mass_concentration_of_chlorophyll_a_in_sea_water_qc_agg",
+        "volume_backwards_scattering_coefficient_of_radiative_flux_in_sea_water",
+        "volume_backwards_scattering_coefficient_of_radiative_flux_in_sea_water_qc_agg",
+        "sea_water_practical_salinity",
+        "sea_water_practical_salinity_qc_agg",
+        "sea_water_temperature",
+        "sea_water_temperature_qc_agg"
+      ]
+    },
+    "ctd": {
+      "description": "conductivity-temperature-depth",
+      "variables": [
+        "time",
+        "latitude",
+        "longitude",
+        "z",
+        "sea_water_electrical_conductivity",
+        "sea_water_electrical_conductivity_qc_agg",
+        "sea_water_practical_salinity",
+        "sea_water_practical_salinity_qc_agg",
+        "sea_water_density",
+        "sea_water_density_qc_agg",
+        "sea_water_pressure",
+        "sea_water_pressure_qc_agg",
+        "sea_water_temperature",
+        "sea_water_temperature_qc_agg"
+      ]
+    },
+    "doxygen": {
+      "description": "dissolved oxygen",
+      "variables": [
+        "time",
+        "latitude",
+        "longitude",
+        "z",
+        "moles_of_oxygen_per_unit_mass_in_sea_water",
+        "moles_of_oxygen_per_unit_mass_in_sea_water_qc_agg",
+        "mole_concentration_of_dissolved_molecular_oxygen_in_sea_water",
+        "mole_concentration_of_dissolved_molecular_oxygen_in_sea_water_qc_agg",
+        "sea_water_practical_salinity",
+        "sea_water_practical_salinity_qc_agg",
+        "sea_water_pressure",
+        "sea_water_pressure_qc_agg",
+        "sea_water_temperature",
+        "sea_water_temperature_qc_agg"
+      ]
+    }
+  },
+  "sites": {
+    "CE02SHSM": {
+      "name": "Coastal Endurance Oregon Shelf Surface Mooring, Near Surface Instrument Frame",
+      "latitude": 44.63510,
+      "longitude": -124.30350,
+      "common_start": "2015-04-02T20:45:00Z",
+      "common_end": "2026-06-16T17:48:00Z",
+      "streams": {
+        "flort": "ooi-ce02shsm-rid27-02-flortd000",
+        "ctd": "ooi-ce02shsm-rid27-03-ctdbpc000",
+        "doxygen": "ooi-ce02shsm-rid27-04-dostad000"
+      }
+    },
+    "CE01ISSM": {
+      "name": "Coastal Endurance Oregon Inshore Surface Mooring, Near Surface Instrument Frame",
+      "latitude": 44.65961,
+      "longitude": -124.09628,
+      "common_start": "2014-04-17T22:00:00Z",
+      "common_end": "2025-09-22T13:33:00Z",
+      "streams": {
+        "flort": "ooi-ce01issm-rid16-02-flortd000",
+        "ctd": "ooi-ce01issm-rid16-03-ctdbpc000",
+        "doxygen": "ooi-ce01issm-rid16-03-dostad000"
+      }
+    },
+    "CE06ISSM": {
+      "name": "Coastal Endurance Washington Inshore Surface Mooring, Near Surface Instrument Frame",
+      "latitude": 47.13381,
+      "longitude": -124.26924,
+      "common_start": "2015-04-10T05:30:00Z",
+      "common_end": "2025-07-27T20:31:00Z",
+      "streams": {
+        "flort": "ooi-ce06issm-rid16-02-flortd000",
+        "ctd": "ooi-ce06issm-rid16-03-ctdbpc000",
+        "doxygen": "ooi-ce06issm-rid16-03-dostad000"
+      }
+    },
+    "CE07SHSM": {
+      "name": "Coastal Endurance Washington Shelf Surface Mooring, Near Surface Instrument Frame",
+      "latitude": 46.98729,
+      "longitude": -124.56442,
+      "common_start": "2015-04-05T17:15:00Z",
+      "common_end": "2025-09-18T11:30:00Z",
+      "streams": {
+        "flort": "ooi-ce07shsm-rid27-02-flortd000",
+        "ctd": "ooi-ce07shsm-rid27-03-ctdbpc000",
+        "doxygen": "ooi-ce07shsm-rid27-04-dostad000"
+      }
+    }
+  },
+  "qc_flag_meanings": {
+    "1": "PASS",
+    "2": "NOT_EVALUATED",
+    "3": "SUSPECT",
+    "4": "FAIL",
+    "9": "MISSING"
+  },
+  "acquisition_defaults": {
+    "chunk_days": 31,
+    "timeout_seconds": 120,
+    "max_attempts": 4,
+    "backoff_seconds": 2,
+    "user_agent": "SAFE-SILENCE-research/1.0"
+  },
+  "source_notes": [
+    "All times are UTC.",
+    "Availability ranges were read from OOI ERDDAP allDatasets on 2026-09-16.",
+    "FLORT optical backscatter is not labeled as direct turbidity.",
+    "Raw QARTOD flags are retained; filtering belongs to the audit/cleaning task.",
+    "The z field is retained but must not be assumed to equal physical sensor depth without metadata verification."
+  ]
+}

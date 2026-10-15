@@ -1,0 +1,61 @@
+events:
+  task: H
+  input_directory: data/processed/task_g
+  output_directory: data/processed/task_h
+  labeling_version: "1.1"
+  causal_labels_only: true
+  split:
+    reuse_task_g_splits: true
+    calibration_split: train
+    external_sites_are_test_only: true
+  calibration:
+    site: CE02SHSM
+    observed_measurements_only: true
+    per_protocol: true
+    minimum_samples: 128
+  ecological_reference:
+    hypoxia:
+      threshold_mg_l: 2.0
+      oxygen_molar_mass_g_mol: 31.998
+      assumed_seawater_density_kg_l: 1.025
+      threshold_umol_kg: 60.979
+      source: https://oceanservice.noaa.gov/hazards/hypoxia/
+  labels:
+    hypoxia_absolute:
+      channel: oxygen
+      direction: below_or_equal
+      minimum_consecutive_steps: 2
+      threshold_source: ecological_reference
+    low_oxygen_anomaly:
+      channel: oxygen
+      direction: below_or_equal
+      training_quantile: 0.05
+      minimum_consecutive_steps: 2
+    rapid_temperature_change:
+      channel: temperature
+      statistic: absolute_causal_rate_per_hour
+      training_quantile: 0.995
+      minimum_consecutive_steps: 1
+    high_chlorophyll_anomaly:
+      channel: chlorophyll
+      statistic: observed_level
+      training_quantile: 0.995
+      minimum_consecutive_steps: 2
+    multivariate_innovation_anomaly:
+      channels: [temperature, salinity, oxygen, chlorophyll]
+      statistic: robust_l2_causal_innovation
+      training_quantile: 0.995
+      minimum_consecutive_steps: 1
+  robust_score:
+    mad_consistency_factor: 1.4826
+    minimum_scale: 1.0e-8
+  episode_merge_gap_steps: 1
+  critical_union:
+    - hypoxia_absolute
+    - low_oxygen_anomaly
+    - rapid_temperature_change
+    - high_chlorophyll_anomaly
+    - multivariate_innovation_anomaly
+  reporting:
+    pool_temporal_protocols: false
+    score_zero_support_event_classes: false

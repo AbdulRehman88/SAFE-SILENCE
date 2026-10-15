@@ -1,0 +1,77 @@
+scheduler:
+  task: P
+  scheduler_version: "1.0"
+  fusion_directory: results/task_o
+  network_directory: results/task_k
+  output_directory: results/task_p
+  proposed_policy: cvar_risk_reduction_per_joule
+  reference_policy: expected_risk_reduction_per_joule
+  temporal_protocols_may_be_pooled: false
+  algorithm_shared_across_sites_scenarios_and_splits: true
+  parameters_tuned_on_test_or_external_data: false
+  uses_future_measurements: false
+  oracle_fields_are_scheduler_inputs: false
+  current_outcome_is_scheduler_input: false
+  component_evaluation_only: true
+  cvar_alpha: 0.95
+  causal_link_belief:
+    method: lagged_ack_ewma
+    initial_probability: 0.95
+    update_gain: 0.20
+    minimum_probability: 0.05
+    maximum_probability: 0.995
+    update_only_after_attempted_packet: true
+  loss_profiles:
+    primary:
+      missed_critical_event: 4.0
+      notification_delay: 2.0
+      reconstruction: 1.0
+      connectivity_ambiguity: 2.0
+      calibration: 0.0
+    miss_dominant:
+      missed_critical_event: 8.0
+      notification_delay: 1.0
+      reconstruction: 1.0
+      connectivity_ambiguity: 1.0
+      calibration: 0.0
+    uncertainty_dominant:
+      missed_critical_event: 4.0
+      notification_delay: 1.0
+      reconstruction: 2.0
+      connectivity_ambiguity: 3.0
+      calibration: 0.0
+  successful_delivery_effect:
+    critical_maximum_resolves_batch_alert_miss: true
+    deadline_metadata_resolves_notification_delay: true
+    retained_items_resolve_reconstruction_loss: true
+    successful_contact_resolves_connectivity_ambiguity: true
+  queue_stress:
+    candidates_per_opportunity: 8
+    maximum_selected_packets: 4
+    component_queue_has_no_residence_delay_claim: true
+  mandatory:
+    critical_evidence_threshold: 0.50
+    deadline_urgency_threshold: 0.90
+  liveness_reserve:
+    enabled: true
+    uncertainty_threshold: 0.50
+    reserve_packets: 1
+    applies_when_no_mandatory_candidate: true
+  budgets:
+    expected_wire_bytes_per_opportunity: 2000.0
+    modeled_energy_j_per_opportunity: 40.0
+    expected_airtime_seconds_per_opportunity: 12.0
+  cost:
+    energy_weight: 1.0
+    byte_weight: 0.001
+    airtime_weight: 0.10
+    epsilon: 1.0e-9
+  energy_model:
+    relay_to_buoy_hops: 1
+    uses_task_k_bitrate_power_ack_and_retry_parameters: true
+    hardware_measured: false
+  reporting:
+    proposed_policy_row_trace_only_for_primary_loss_profile: true
+    reference_policy_metrics_only: true
+    actual_delivery_replay_deferred: true
+    matched_cost_full_system_comparison_deferred_to_task_q: true

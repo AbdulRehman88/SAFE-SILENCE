@@ -1,0 +1,43 @@
+fusion:
+  task: O
+  fusion_version: "1.0"
+  input_directory: results/task_j
+  output_directory: results/task_o
+  method: associative_top_k
+  top_k: 4
+  relay_batch_items: 8
+  temporal_protocols_may_be_pooled: false
+  algorithm_shared_across_sites_and_splits: true
+  parameters_tuned_on_test_or_external_data: false
+  uses_future_measurements: false
+  oracle_fields_are_fusion_inputs: false
+  critical_evidence_override: true
+  deterministic_total_order: true
+  exact_provenance: true
+  priority:
+    critical_evidence_weight: 8.0
+    environmental_uncertainty_weight: 0.30
+    deadline_urgency_weight: 0.30
+    residual_magnitude_weight: 0.40
+    divide_by_payload_bytes: true
+    tie_break: [sensing_timestamp_ascending, source_id_ascending, item_id_ascending]
+  references:
+    - no_relay_fusion
+    - mean_relay_fusion
+  mean_reference:
+    critical_evidence_threshold: 0.50
+    preserves_individual_items: false
+    preserves_critical_maxima: false
+  encoding_bytes:
+    relay_packet_header: 20
+    fixed_summary_metadata: 32
+    retained_item: 20
+    provenance_per_source: 2
+    mean_summary_payload: 16
+  order_audit:
+    permutations: [original, reversed, rotated, item_id_descending]
+  reporting:
+    component_evaluation_only: true
+    does_not_replay_acoustic_delivery: true
+    preserve_row_level_membership_for_proposed_method: true
+    energy_is_deferred_to_task_p: true

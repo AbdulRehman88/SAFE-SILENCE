@@ -1,0 +1,67 @@
+preprocessing:
+  output_directory: data/processed/task_g
+  audit_directory: data/interim/ooi_audit
+  availability_threshold: 0.80
+  accepted_qartod_flags: [1]
+  maximum_causal_fill_steps: 1
+  age_cap_steps: 96
+  aggregation: median
+  measurement_values_used_for_availability_selection: false
+  post_qc_gate_uses_qartod_finiteness_and_physical_validity: true
+  fit_scalers_during_preprocessing: false
+  channels:
+    temperature:
+      stream: ctd
+      variable: sea_water_temperature
+      qc_variable: sea_water_temperature_qc_agg
+      expected_units: degree_Celsius
+      minimum: -2.5
+      maximum: 40.0
+    salinity:
+      stream: ctd
+      variable: sea_water_practical_salinity
+      qc_variable: sea_water_practical_salinity_qc_agg
+      expected_units: "0.001"
+      minimum: 0.0
+      maximum: 45.0
+    oxygen:
+      stream: doxygen
+      variable: moles_of_oxygen_per_unit_mass_in_sea_water
+      qc_variable: moles_of_oxygen_per_unit_mass_in_sea_water_qc_agg
+      expected_units: micromol.kg-1
+      minimum: 0.0
+      maximum: 1000.0
+    chlorophyll:
+      stream: flort
+      variable: mass_concentration_of_chlorophyll_a_in_sea_water
+      qc_variable: mass_concentration_of_chlorophyll_a_in_sea_water_qc_agg
+      expected_units: microg.L-1
+      minimum: 0.0
+      maximum: 1000.0
+  protocols:
+    primary_15min:
+      grid_minutes: 15
+      development_site: CE02SHSM
+      external_sites: [CE07SHSM]
+      quality_gate_channels: [temperature, salinity, oxygen, chlorophyll]
+      purpose: primary
+    secondary_60min:
+      grid_minutes: 60
+      development_site: CE02SHSM
+      external_sites: [CE07SHSM, CE01ISSM, CE06ISSM]
+      quality_gate_channels: [temperature, salinity, oxygen, chlorophyll]
+      site_overrides:
+        CE01ISSM:
+          quality_gate_channels: [temperature, salinity, chlorophyll]
+          sparse_channels: [oxygen]
+        CE06ISSM:
+          quality_gate_channels: [temperature, salinity, chlorophyll]
+          sparse_channels: [oxygen]
+      purpose: coarse_multirate_and_oxygen_sparse_robustness
+  split:
+    train_fraction: 0.60
+    validation_fraction: 0.20
+    internal_test_fraction: 0.20
+    embargo_windows: 1
+    ordering: chronological
+    uses_measurement_values: false

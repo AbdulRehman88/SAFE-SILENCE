@@ -1,0 +1,12 @@
+evidence_directory: results/task_x
+output_directory: results/manuscript_figures
+width_in: 3.5
+dpi: 600
+font_family: DejaVu Serif
+protocols: [primary_15min, secondary_60min]
+scenarios: [F0_stable, F2_burst, F3_long_heavy_tail, F5_ack_asymmetry, F8_hard_partition, F13_event_coincident_outage, F14_unseen_duration]
+scenario_labels: [S, B, HT, AA, HP, EC, UD]
+trust_variants: [no_expiration, fixed_timeout, no_connectivity, collapsed_belief, no_unknown]
+trust_labels: [No expiration, Fixed timeout, No connectivity, Collapsed beliefs, No UNKNOWN]
+profiles: [primary, miss_dominant, uncertainty_dominant]
+profile_labels: [Primary, Miss-dominant, Uncertainty-dominant]

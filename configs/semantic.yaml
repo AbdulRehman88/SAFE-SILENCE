@@ -1,0 +1,52 @@
+semantic:
+  task: J
+  semantic_version: "1.0"
+  prediction_directory: results/task_i
+  prediction_artifact_directory: artifacts/task_i
+  event_directory: data/processed/task_h
+  output_directory: results/task_j
+  channels: [temperature, salinity, oxygen, chlorophyll]
+  causal_contract:
+    uses_current_observation_at_sensor: true
+    uses_future_measurements: false
+    event_evidence_uses_frozen_task_h_rules: true
+    thresholds_tuned_on_test_or_external_data: false
+    temporal_protocols_may_be_pooled: false
+  evidence:
+    numerical_epsilon: 1.0e-8
+    uncertainty_floor_fraction_of_training_scale: 0.01
+    innovation_soft_scale: 1.0
+    breach_soft_scale: 1.0
+    uncertainty_soft_scale: 0.25
+    clip_dimensionless_evidence_at: 20.0
+    channel_weights:
+      innovation: 0.40
+      interval_breach: 0.30
+      predictive_uncertainty: 0.20
+      observation_age: 0.10
+    cross_channel_aggregation: maximum
+    critical_evidence_override: true
+  nominal_policy:
+    innovation_threshold: 0.55
+    alert_threshold: 0.90
+    extreme_interval_breach_ratio: 2.0
+    decision_priority: [critical_event, extreme_risk, innovation, validity_expiry, heartbeat_expiry, silent]
+    thresholds_are_apriori_not_fitted: true
+  bounded_validity:
+    minimum_horizon_steps: 1
+    maximum_horizon_steps: 4
+    heartbeat_interval_steps: 4
+    risk_to_horizon: ceiling_linear_decay
+    alert_advertised_horizon_steps: 0
+  payload_bytes:
+    silent: 0
+    heartbeat: 8
+    innovation: 32
+    alert: 40
+    periodic_raw_reference: 24
+    excludes_network_headers: true
+  reporting:
+    report_by_protocol_site_and_role: true
+    event_recall_is_pre_network_upper_bound: true
+    score_only_available_event_truth: true
+    preserve_row_level_evidence: true

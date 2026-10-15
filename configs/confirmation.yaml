@@ -1,0 +1,58 @@
+confirmation:
+  task: S
+  confirmation_version: "1.1"
+  semantic_directory: results/task_j
+  fusion_directory: results/task_o
+  prior_reintegration_directory: results/task_r
+  output_directory: results/task_s
+  independent_network:
+    base_seed: 193211
+    previous_confirmation_base_seeds: [93211]
+    repetitions: 30
+    must_be_disjoint_from_task_k: true
+    must_be_disjoint_from_prior_confirmation: true
+  frozen_algorithms:
+    network_version: "1.0"
+    scheduler_version: "1.0"
+    integration_version: "1.0"
+    receiver_version: "1.0"
+    cause_version: "1.1"
+    recovery_version: "1.1"
+  proposed_system:
+    scheduler: cvar_risk_reduction_per_joule
+    recovery: safe_silence_bounded
+  primary_analysis:
+    site: CE07SHSM
+    model_role: external_test
+    endpoints:
+      - post_recovery_critical_delivery_recall
+      - realized_post_recovery_tail_proxy_reduction
+    comparisons:
+      expected_scheduler:
+        scheduler: expected_risk_reduction_per_joule
+        recovery: safe_silence_bounded
+      no_recovery:
+        scheduler: cvar_risk_reduction_per_joule
+        recovery: no_recovery
+    paired_unit: repetition
+    test: two_sided_wilcoxon_signed_rank
+    confidence_level: 0.95
+    bootstrap_resamples: 10000
+    bootstrap_seed: 59321
+    multiplicity_correction: holm_across_primary_endpoints_and_scenarios
+    temporal_protocols_may_be_pooled: false
+  secondary_endpoints:
+    - critical_false_trust_rate
+    - post_recovery_timely_critical_delivery_recall
+    - post_recovery_exact_retained_critical_item_recall
+    - tail_proxy_reduction_per_total_modeled_joule
+    - total_network_bytes
+    - total_modeled_energy_j
+  prior_task_r_results_used_to_tune_algorithms: false
+  independent_replication_is_used_for_confirmation: true
+  uses_future_measurements: false
+  oracle_fields_are_policy_inputs: false
+  event_truth_is_policy_input: false
+  energy_is_modeled_not_hardware_measured: true
+  actual_field_deployment_claimed: false
+  claim_scope: independently_seeded_simulated_confirmation

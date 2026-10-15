@@ -1,0 +1,23 @@
+{
+  "archived_cell_artifacts": 42,
+  "development_simulation_passed": true,
+  "figure_generation_passed": true,
+  "full_confirmation_rerun": false,
+  "primary_hypotheses": 210,
+  "project_tests": {
+    "errors": 0,
+    "evidence": "Executed pytest JUnit report",
+    "failed": 0,
+    "junit_sha256": "69ea90e4145e38b8ecb5dcf431dc6489506a95261aa05f1e3828445faa3386ec",
+    "passed": 147,
+    "skipped": 0
+  },
+  "raw_data_retraining_verified": false,
+  "release_inputs": 59,
+  "schema_version": 1,
+  "scope": "Public software release verification",
+  "statistical_tables_match_exactly": true,
+  "status": "PASSED",
+  "unique_network_realizations": 420,
+  "verified_utc": "2026-10-15T05:58:58.868036+00:00"
+}

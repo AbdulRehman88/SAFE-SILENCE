@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+type: software
+title: "SAFE-SILENCE: Receiver-Verifiable Semantic Telemetry for Underwater Digital Twins"
+message: >-
+  If you use SAFE-SILENCE in your research, please cite this software
+  and the associated research paper. Use the version-specific Zenodo
+  citation for the software release you used when available.
+authors:
+  - given-names: "Abdul"
+    family-names: "Rehman"
+repository-code: "https://github.com/AbdulRehman88/SAFE-SILENCE"
+license: MIT
+abstract: >-
+  A configurable research pipeline for ocean-data preparation,
+  predictive semantic evidence, simulated acoustic communication,
+  receiver trust, relay fusion, scheduling, bounded recovery,
+  paired statistical evaluation, and manuscript figure generation.
+keywords:
+  - underwater communication
+  - semantic telemetry
+  - receiver-verifiable silence
+  - digital twins
+  - bounded recovery
+  - reproducible research

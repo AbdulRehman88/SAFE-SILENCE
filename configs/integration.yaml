@@ -1,0 +1,39 @@
+integration:
+  task: Q
+  integration_version: "1.0"
+  scheduler_directory: results/task_p
+  fusion_directory: results/task_o
+  network_directory: results/task_k
+  output_directory: results/task_q
+  loss_profile: primary
+  proposed_policy: cvar_risk_reduction_per_joule
+  reference_policies:
+    - expected_risk_reduction_per_joule
+    - fixed_threshold
+    - periodic_fifo
+    - age_of_information
+    - age_of_incorrect_information
+    - prediction_residual
+    - uncertainty_only
+    - semantic_without_link_belief
+  matched_realizations: true
+  matched_opportunity_constraints: true
+  relay_to_buoy_hops: 1
+  temporal_protocols_may_be_pooled: false
+  parameters_tuned_on_test_or_external_data: false
+  uses_future_measurements: false
+  oracle_fields_are_policy_inputs: false
+  event_truth_is_policy_input: false
+  current_outcome_is_policy_input: false
+  primary_outages_remain_event_independent: true
+  scoring:
+    delivery_deadline_is_protocol_grid: true
+    critical_batch_detection_uses_preserved_maximum: true
+    exact_critical_provenance_requires_retained_item: true
+    calibration_not_scored_without_probability_forecast: true
+  reporting:
+    store_proposed_delivery_trace: true
+    energy_is_modeled_not_hardware_measured: true
+    actual_field_deployment_claimed: false
+    complete_path_scope: semantic_packet_to_relay_to_buoy
+    receiver_recovery_reintegration_deferred: true

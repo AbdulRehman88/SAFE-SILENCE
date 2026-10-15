@@ -1,0 +1,59 @@
+recovery:
+  task: N
+  recovery_version: "1.1"
+  input_directory: results/task_m
+  network_directory: results/task_k
+  output_directory: results/task_n
+  temporal_protocols_may_be_pooled: false
+  algorithm_shared_across_sites_and_scenarios: true
+  parameters_tuned_on_test_or_external_data: false
+  uses_future_measurements: false
+  oracle_fields_are_policy_inputs: false
+  event_truth_is_policy_input: false
+  named_cause_is_never_sufficient_for_action: true
+  policies:
+    safe_silence_bounded:
+      deployable: true
+      maximum_attempts_per_trigger: 2
+      cooldown_steps: 1
+      liveness_interval_steps: 2
+      liveness_environmental_uncertainty_minimum: 0.25
+      trigger_states: [ambiguous, failure_suspected, recovery_pending, stale_unsafe]
+      protective_causes: [isolated_loss, persistent_outage, contract_divergence, unknown]
+    no_recovery:
+      deployable: true
+      maximum_attempts_per_trigger: 0
+    fixed_probe:
+      deployable: true
+      interval_steps: 4
+      maximum_attempts_per_trigger: 1
+    periodic_retry:
+      deployable: true
+      interval_steps: 2
+      maximum_attempts_per_trigger: 1
+    oracle_cause_reference:
+      deployable: false
+      maximum_attempts_per_trigger: 2
+    unbounded_retry_ceiling:
+      deployable: false
+      maximum_attempts_per_trigger: 8
+  packet_bytes:
+    probe_payload: 12
+    liveness_response_payload: 24
+  reconciliation:
+    one_attempt_per_grid_step: true
+    source_retains_critical_alerts: true
+    critical_alert_retention_steps: 4
+    retention_matches_maximum_silence_horizon: true
+    maximum_critical_packets_per_response: 1
+    critical_response_uses_original_wire_bytes: true
+    successful_response_consumes_cached_packet: true
+    exact_event_response_provenance: true
+  matched_replay:
+    base_seed: 7777
+    random_draws_shared_across_policies: true
+    physical_state_used_only_by_simulator: true
+  reporting:
+    primary_endpoint: critical_false_trust_rate
+    energy_is_modeled_not_hardware_measured: true
+    oracle_policies_are_diagnostic_references: true

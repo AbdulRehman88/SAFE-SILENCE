@@ -1,0 +1,19 @@
+schema_version: 1
+includes:
+  - project.yaml
+  - data.yaml
+  - preprocessing.yaml
+  - events.yaml
+  - network.yaml
+  - model.yaml
+  - semantic.yaml
+  - receiver.yaml
+  - cause.yaml
+  - recovery.yaml
+  - fusion.yaml
+  - scheduler.yaml
+  - integration.yaml
+  - reintegration.yaml
+  - confirmation.yaml
+  - protocol.yaml
+  - experiments.yaml

@@ -1,0 +1,68 @@
+cause:
+  task: M
+  cause_version: "1.1"
+  input_directory: results/task_l
+  output_directory: results/task_m
+  temporal_protocols_may_be_pooled: false
+  algorithm_shared_across_sites_and_scenarios: true
+  parameters_tuned_on_test_or_external_data: false
+  uses_future_measurements: false
+  oracle_fields_are_evaluation_only: true
+  event_truth_is_evaluation_only: true
+  exact_physical_cause_is_not_claimed: true
+  score_semantics: rule_based_pseudo_posterior
+  probabilities_are_empirically_calibrated: false
+  classes: [valid_suppression, isolated_loss, persistent_outage, contract_divergence, unknown]
+  identifiable_classes: [valid_suppression, isolated_loss, persistent_outage, contract_divergence]
+  forbidden_inference_prefixes: [_oracle_, evaluation_only_]
+  evidence:
+    silence_run_cap_steps: 4
+    overdue_cap_steps: 4
+    numerical_epsilon: 1.0e-9
+  logits:
+    valid_suppression:
+      intercept: -1.0
+      contract_valid: 4.0
+      connectivity: 2.0
+      trusted_state: 3.0
+      contact_due: -4.0
+      silence_run: -1.0
+    isolated_loss:
+      intercept: -1.0
+      contact_due: 2.5
+      first_due_absence: 2.0
+      connectivity: 1.5
+      ambiguous_state: 1.0
+      stale_state: -2.0
+    persistent_outage:
+      intercept: -2.0
+      inverse_connectivity: 4.0
+      silence_run: 3.0
+      overdue: 2.0
+      stale_state: 2.0
+      contract_valid: -2.0
+    contract_divergence:
+      intercept: -2.0
+      contract_invalid: 2.0
+      contact_due: 3.0
+      connectivity: 2.0
+      overdue: 2.0
+      silence_run: 1.0
+  abstention:
+    entropy_floor: 0.55
+    maximum_unknown_probability: 0.85
+    decision_minimum_known_probability: 0.50
+    decision_minimum_margin: 0.12
+    unknown_is_retained: true
+  valid_suppression_admissibility:
+    receiver_state: trusted_silence
+    require_valid_contract: true
+    require_contact_not_due: true
+    minimum_connectivity: 0.95
+    maximum_environmental_uncertainty: 0.85
+    inadmissible_decision: unknown
+  reporting:
+    zero_support_classes_are_scored: false
+    oracle_labels_are_evaluation_only: true
+    exact_cause_accuracy_is_diagnostic_only: true
+    primary_safety_error: unsafe_silence_predicted_valid_suppression

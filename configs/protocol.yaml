@@ -1,0 +1,28 @@
+protocol:
+  node_actions: [silent, heartbeat, innovation, alert]
+  bounded_silence:
+    enabled: true
+    validity_horizon_steps: 4
+    minimum_trust_probability: 0.95
+    heartbeat_interval_steps: 4
+  dual_belief:
+    environmental_uncertainty: true
+    connectivity_uncertainty: true
+    unknown_cause_class: true
+  relay_fusion:
+    method: associative_top_k
+    k: 4
+    preserve_critical_alerts: true
+  scheduler:
+    objective: cvar_risk_reduction_per_joule
+    cvar_alpha: 0.95
+    byte_cost_weight: 0.001
+    energy_cost_weight: 1.0
+    airtime_cost_weight: 0.10
+  receiver_states:
+    - updated
+    - trusted_silence
+    - ambiguous
+    - failure_suspected
+    - recovery_pending
+    - stale_unsafe

@@ -1,0 +1,40 @@
+experiments:
+  primary_endpoint: critical_false_trust_rate
+  matched_cost_axis: transmitted_bytes
+  secondary_metrics:
+    - critical_event_recall
+    - missed_event_probability
+    - event_notification_delay
+    - tail_reconstruction_error
+    - calibration_error
+    - energy_joules
+    - network_lifetime
+    - p95_latency
+  baselines:
+    - periodic_raw
+    - fixed_threshold
+    - age_of_information
+    - age_of_incorrect_information
+    - prediction_residual
+    - uncertainty_only
+    - semantic_without_silence_model
+    - oracle_silence
+  ablations:
+    - no_connectivity_uncertainty
+    - no_validity_horizon
+    - no_liveness_evidence
+    - no_relay_fusion
+    - mean_relay_fusion
+    - expected_risk_scheduler
+  repetitions: 10
+  confidence_level: 0.95
+  primary_scenarios:
+    outage_dependence: independent_of_environment
+    channel_conditions: [in_distribution, unseen]
+  stress_tests:
+    - event_correlated_outage
+    - hard_partition
+    - sensor_failure
+    - common_cause_failure
+    - event_distribution_shift
+

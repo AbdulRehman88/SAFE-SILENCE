@@ -1,0 +1,12 @@
+project:
+  name: SAFE-SILENCE
+  seed: 20260917
+  deterministic_torch: true
+  timezone: UTC
+  paths:
+    raw_data: data/raw
+    interim_data: data/interim
+    processed_data: data/processed
+    results: results
+    artifacts: artifacts
+

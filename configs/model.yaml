@@ -1,0 +1,53 @@
+model:
+  task: I
+  input_directory: data/processed/task_h
+  artifact_directory: artifacts/task_i
+  result_directory: results/task_i
+  predictor: persistence_residual_tcn
+  prediction_parameterization: persistence_plus_learned_residual
+  channels: [temperature, salinity, oxygen, chlorophyll]
+  features: [value, observed, imputed, age]
+  history_hours: 8
+  input_steps_by_protocol:
+    primary_15min: 32
+    secondary_60min: 8
+  forecast_steps: 1
+  hidden_channels: [32, 32, 32]
+  kernel_size: 3
+  dropout: 0.10
+  maximum_parameters: 250000
+  scaling:
+    fit_site: CE02SHSM
+    fit_split: train
+    observed_only: true
+    method: standard
+  validation_roles:
+    source_split: validation
+    assignment: chronological_by_window
+    tuning_fraction: 0.50
+    disjoint_tuning_and_calibration: true
+  uncertainty:
+    method: deep_ensemble
+    members: 5
+    aleatoric_head: gaussian_diagonal
+    calibration: worst_window_normalized_split_conformal
+    miscoverage_alpha: 0.10
+    calibration_role: calibration
+    minimum_calibration_windows: 3
+    calibration_is_never_used_for_early_stopping: true
+  training:
+    batch_size: 256
+    maximum_epochs: 60
+    early_stopping_patience: 8
+    learning_rate: 0.001
+    weight_decay: 0.0001
+    gradient_clip_norm: 1.0
+    num_workers: 0
+    device: auto
+  evaluation:
+    partitions: [tuning, calibration, internal_test, external_test]
+    primary_partitions: [internal_test, external_test]
+    report_by_channel: true
+    report_event_conditioned: true
+    persistence_baseline: true
+    pool_temporal_protocols: false

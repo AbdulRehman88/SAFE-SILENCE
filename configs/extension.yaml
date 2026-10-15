@@ -1,0 +1,40 @@
+extension:
+  version: '0.21.0'
+  output_directory: results/task_x
+  new_network_base_seed: 293211
+  smoke_network_base_seed: 393211
+  previous_network_base_seeds: [3407, 93211, 193211]
+  primary_site: CE07SHSM
+  primary_role: external_test
+  protocols: [primary_15min, secondary_60min]
+  scenarios: [F0_stable, F2_burst, F3_long_heavy_tail, F5_ack_asymmetry, F8_hard_partition, F13_event_coincident_outage, F14_unseen_duration]
+  repetitions: 30
+  development_site: CE02SHSM
+  development_role: internal_test
+  development_role_is_reused_for_extension_calibration: true
+  budget_quantile: 0.95
+  budget_quantile_method: linear
+  common_budget_label: common_budget_not_exact_resource_matching
+  recovery_policies: [safe_silence_bounded, periodic_retry, fixed_probe, no_recovery]
+  trust_variants: [full, no_expiration, no_connectivity, collapsed_belief, no_unknown, fixed_timeout]
+  primary_trust_scope: source_protocol_grid
+  secondary_trust_scope: relay_candidate_opportunities
+  fixed_timeout_protocol_steps: 4
+  collapsed_threshold: product_of_existing_gate_boundary_values
+  no_unknown_tie_break: known_cause_declaration_order
+  profiles: [primary, miss_dominant, uncertainty_dominant]
+  confidence_level: 0.95
+  bootstrap_resamples: 10000
+  bootstrap_seed: 69321
+  primary_family:
+    recovery_comparators: [periodic_retry, fixed_probe]
+    recovery_endpoints: [post_recovery_critical_delivery_recall, realized_post_recovery_tail_proxy_reduction]
+    trust_comparators: [no_expiration, no_connectivity, collapsed_belief, no_unknown, fixed_timeout]
+    trust_endpoint: critical_false_trust_pre_action
+    scheduler_comparator: expected_risk_reduction_per_joule
+    scheduler_endpoints: [post_recovery_critical_delivery_recall, realized_post_recovery_tail_proxy_reduction]
+    holm_across_every_declared_primary_test: true
+    expected_test_count: 210
+  retain_full_network_traces: false
+  retain_primary_relay_trace: true
+  no_algorithmic_tuning_after_primary_execution: true
