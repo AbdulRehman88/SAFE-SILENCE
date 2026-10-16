@@ -24,3 +24,12 @@ keywords:
   - reproducible research
 version: "0.20.1"
 date-released: "2026-10-15"
+doi: "10.5281/zenodo.23386629"
+references:
+  - type: data
+    title: "SAFE-SILENCE: Reproducibility Data, Models, and Experimental Evidence"
+    authors:
+      - given-names: "Abdul"
+        family-names: "Rehman"
+    year: 2026
+    doi: "10.5281/zenodo.23386811"

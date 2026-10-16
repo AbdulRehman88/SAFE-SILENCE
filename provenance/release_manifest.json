@@ -17,9 +17,9 @@
                       "sha256":  "589191117772bbb86645d171d153b6d166a9ce50cb7abcc206af90de1284cf7d"
                   },
                   {
-                      "bytes":  952,
+                      "bytes":  1216,
                       "path":  "CITATION.cff",
-                      "sha256":  "fa33bf42810e35119ff111672a38a636b942186dc01674fa91e7bd5646a2a0ab"
+                      "sha256":  "425a31bf374bc7a18bae2dec9ffb19cd1cc0e377885b01b812403e90a0ed0946"
                   },
                   {
                       "bytes":  1086,
@@ -27,9 +27,9 @@
                       "sha256":  "0725fd087793d7f8ff79cabafa540cf697d7055b9d29141d45bfc7138271ad11"
                   },
                   {
-                      "bytes":  6632,
+                      "bytes":  7109,
                       "path":  "README.md",
-                      "sha256":  "8a8ba26cb14b95e54555c10ba61d4ddc86a48bc558d8cac9805e7ffff9ede2ed"
+                      "sha256":  "cb02ce9f3b8b95d3dc277fbc10a01e9eee3c90f225691f7d11e4f508b517b500"
                   },
                   {
                       "bytes":  4329,

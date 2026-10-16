@@ -119,7 +119,16 @@ https://oceanobservatories.org/how-to-use-acknowledge-and-cite-data/
 
 When publishing work using SAFE-SILENCE, please cite both the associated manuscript and the specific archived software version used.
 
-Publication metadata and the version-specific Zenodo DOI will accompany the public release. No journal publication or DOI is asserted here.
+Software v0.20.1: https://doi.org/10.5281/zenodo.23386629
+
+Companion data, models, and experimental evidence: https://doi.org/10.5281/zenodo.23386811
+
+Download SAFE-SILENCE_Evidence_v0.20.1.zip from the evidence record and extract it into the software project root. The data/, artifacts/, and results/ directories must be alongside configs/ and scripts/.
+
+Expected evidence ZIP SHA-256:
+565eaa720a65f03c9a655bf4587a29e7cbe805eaf572c13ee5417890021a4b1c
+
+The software uses the MIT License. Author-generated evidence uses CC BY 4.0; original OOI observations retain their provider terms and acknowledgment requirements.
 
 ## License
 
